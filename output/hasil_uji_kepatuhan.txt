@@ -1,0 +1,77 @@
+============================================================================
+A. DATASET — yang wajib dijelaskan menurut brief
+============================================================================
+Jumlah data (mentah)      : 140,228 baris x 59 kolom
+Jumlah data (dipakai)     : 8,211 baris
+Alasan filter             : vote_count >= 500 supaya target stabil
+
+TIPE DATA fitur terpilih:
+  longevity_avg   : float64  | contoh: 2.8696
+  vote_count      : int64    | contoh: 97
+  year            : float64  | contoh: 1991.0
+  gender          : str      | contoh: female
+  brand           : str      | contoh: Azzaro
+  notes_base      : str      | contoh: Honey:25|Amber:20|Cedar:12|Musk:10
+  accords         : str      | contoh: citrus:100|fresh spicy:47|green:41|sweet:33|aromatic
+
+MISSING VALUE (di data terpakai):
+  longevity_avg   :     0 (  0.0%)
+  vote_count      :     0 (  0.0%)
+  year            :   230 (  2.8%)
+  gender          :     0 (  0.0%)
+  brand           :     0 (  0.0%)
+  notes_base      : 1,283 ( 15.6%)
+  notes_middle    : 1,287 ( 15.7%)
+  notes_top       : 1,284 ( 15.6%)
+  accords         :    10 (  0.1%)
+
+DISTRIBUSI TARGET (longevity_avg):
+count    8211.000
+mean        3.271
+std         0.460
+min         1.538
+25%         2.954
+50%         3.267
+75%         3.590
+max         4.897
+  skewness : +0.002  -> normal
+  kurtosis : +0.014
+
+OUTLIER target (IQR)      : 49 baris (0.60%) | batas 2.00 - 4.54
+OUTLIER vote_count (IQR)  : 882 baris (10.7%) -> alasan dipakai log
+
+DUPLIKAT:
+  baris duplikat penuh     : 0
+  nama+brand kembar        : 47 (wajar: reformulasi)
+
+KETIDAKSEIMBANGAN KELAS   : N/A - ini regression (target kontinu), bukan klasifikasi
+
+============================================================================
+B. KANDIDAT FITUR — cek data leakage
+============================================================================
+  vote_count      : korelasi +0.114 -> pakai
+  year            : korelasi +0.044 -> pakai
+  gender          : teks/kategorikal -> PAKAI (encode)
+  brand           : teks/kategorikal -> HATI-HATI (1288 brand)
+  notes_top       : teks/kategorikal -> PAKAI (encode)
+  notes_middle    : teks/kategorikal -> PAKAI (encode)
+  notes_base      : teks/kategorikal -> PAKAI (encode)
+  accords         : teks/kategorikal -> PAKAI (encode)
+  rating_avg      : korelasi +0.293 -> TOLAK — target alternatif
+  sillage_avg     : korelasi +0.903 -> TOLAK — LEAKAGE
+  price_value_avg : korelasi -0.216 -> TOLAK — vote yang sama
+  have            : korelasi +0.116 -> pakai
+  want            : korelasi +0.219 -> pakai
+  people          : korelasi +0.114 -> pakai
+  winter          : korelasi +0.239 -> pakai
+  summer          : korelasi -0.047 -> pakai
+
+============================================================================
+C. TARGET vs ALGORITMA
+============================================================================
+Tema brief     : B. Regression (prediksi nilai numerik) -> DIIZINKAN
+Target         : longevity_avg (numerik kontinu 1-5)  -> SESUAI
+Metrik wajib   : MAE, MSE, RMSE, R2                    -> SEMUA TERSEDIA
+Algoritma brief: Linear Regression, Random Forest Regression,
+                 Gradient Boosting Regression          -> ADA DI DAFTAR
+Bonus          : Ridge (algoritma lain yang relevan, diizinkan)

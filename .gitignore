@@ -1,0 +1,15 @@
+# data mentah tidak diunggah, terlalu besar dan ada di Kaggle
+data/
+*.csv
+
+# artefak lokal
+app/*.bak
+**/__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# berkas besar yang tidak perlu untuk aplikasi
+docs/*.pdf
+docs/*.docx
