@@ -194,13 +194,18 @@ div[role="option"] { color: #1B2430 !important; }
 div[role="option"]:hover, div[role="option"][aria-selected="true"] { background: #EAF8F3 !important; }
 
 div[data-testid="stAlert"] { border-radius: 12px; }
-.stButton > button {
+.stButton > button,
+div[data-testid="stFormSubmitButton"] > button {
   background: linear-gradient(135deg, #F2704F 0%, #F7A44B 100%);
   color: #FFFFFF; border: none; border-radius: 12px;
   padding: 13px 30px; font-size: 12.5px; letter-spacing: 1.3px; text-transform: uppercase;
   font-weight: 800; width: 100%; box-shadow: 0 6px 18px rgba(242,112,79,.26);
 }
-.stButton > button:hover { background: linear-gradient(135deg, #E05F3E 0%, #F0943B 100%); color: #FFFFFF; }
+.stButton > button:hover,
+div[data-testid="stFormSubmitButton"] > button:hover {
+  background: linear-gradient(135deg, #E05F3E 0%, #F0943B 100%); color: #FFFFFF; border: none;
+}
+div[data-testid="stFormSubmitButton"] > button p { color: #FFFFFF !important; font-weight: 800 !important; }
 .stProgress > div > div > div > div { background: linear-gradient(90deg, #F2704F 0%, #F7B955 100%) !important; }
 
 /* ================= LATAR NOTES 3D ================= */
@@ -254,10 +259,121 @@ img.note3d:nth-child(5n) { animation-duration: 10s; animation-delay: -6s; }
   font-weight: 700; color: #9A8574; white-space: nowrap;
 }
 
-@media (max-width: 760px) {
-  .hero-art { min-height: 190px; }
-  .hero-art img.m1 { width: 98px; transform: rotate(-11deg) translate(-58px, 12px); }
+/* tablet: judul dan padding dikecilkan, kolom boleh turun baris */
+@media (max-width: 1024px) {
+  .hero { padding: 34px 30px 32px 30px; border-radius: 22px; }
+  .hero-title { font-size: 46px; }
+  .hero-sub { font-size: 14px; }
+  .stat-num { font-size: 27px; }
+  .stat-cell { padding: 15px 16px; }
+  .cmp th, .cmp td { padding: 9px 9px; }
+  div[data-testid="stHorizontalBlock"] { flex-wrap: wrap !important; gap: .6rem !important; }
+  div[data-testid="stHorizontalBlock"] > div[data-testid="stColumn"] {
+    flex: 1 1 46% !important; min-width: 46% !important;
+  }
+}
+
+@media (max-width: 860px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 6px; }
+  .hero-title { font-size: 40px; }
+  .hero-art { min-height: 168px; margin-top: 6px; }
+  .hero-art img.m1 { width: 96px; }
   .hero-art img.m2 { width: 122px; }
-  .hero-art img.m3 { width: 96px; transform: rotate(10deg) translate(58px, -12px); }
+  .hero-art img.m3 { width: 94px; }
+  .stat-row { grid-template-columns: repeat(2, 1fr); }
+  .info-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 760px) {
+  .block-container { padding-left: .9rem !important; padding-right: .9rem !important; padding-top: .9rem !important; padding-bottom: 2rem !important; }
+
+  /* hero ditumpuk, judul dikecilkan biar ga makan satu layar */
+  .hero { border-radius: 20px; padding: 22px 18px 20px 18px; margin-bottom: 14px; }
+  .hero-grid { grid-template-columns: 1fr; gap: 4px; }
+  .hero-eyebrow { font-size: 9px; letter-spacing: 1.7px; padding: 5px 10px; margin-bottom: 11px; }
+  .hero-title { font-size: 33px; line-height: 1.1; letter-spacing: -.3px; }
+  .hero-sub { font-size: 13.2px; line-height: 1.68; margin-top: 11px; max-width: 100%; }
+
+  .hero-art { min-height: 132px; gap: 0; margin-top: 4px; }
+  .hero-art img.medali { margin: 0 3px; }
+  .hero-art img.m1 { width: 78px; transform: rotate(-9deg) translateY(9px); }
+  .hero-art img.m2 { width: 100px; transform: rotate(1deg) translateY(-5px); }
+  .hero-art img.m3 { width: 76px; transform: rotate(8deg) translateY(7px); }
   .hero-art-label { display: none; }
+
+  /* stat jadi 2x2, ga kepotong */
+  .stat-row { grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 16px; }
+  .stat-cell { padding: 13px 14px; border-radius: 14px; }
+  .stat-num { font-size: 25px; }
+  .stat-label { font-size: 8.8px; letter-spacing: .8px; margin-top: 6px; }
+
+  .sec { font-size: 10.8px; letter-spacing: 1.2px; padding-bottom: 9px; margin: 24px 0 12px 0; gap: 8px; }
+  .sec .dot { width: 7px; height: 7px; }
+
+  .card { padding: 15px 16px; border-radius: 15px; }
+  .card-name { font-size: 21px; }
+  .card-brand { font-size: 9px; letter-spacing: 1.5px; }
+
+  .score-wrap { padding: 20px 18px; border-radius: 16px; }
+  .score-num { font-size: 46px; }
+  .score-den { font-size: 13px; }
+  .score-cat { font-size: 10.5px; letter-spacing: 1.5px; margin-top: 9px; }
+  .score-note { font-size: 12px; }
+
+  .chip { font-size: 11.5px; padding: 4px 11px; margin: 0 4px 6px 0; }
+
+  /* bar accord: label jangan makan setengah layar */
+  .bar-row { gap: 8px; margin-bottom: 7px; }
+  .bar-name { width: 84px; font-size: 11px; }
+  .bar-val { width: 26px; font-size: 10.5px; }
+
+  .prose { font-size: 13.4px; line-height: 1.72; margin-bottom: 12px; }
+  .point { gap: 10px; margin-bottom: 12px; }
+  .point-num { width: 21px; height: 21px; font-size: 10.5px; }
+  .point-txt { font-size: 13.2px; line-height: 1.68; }
+
+  .info-grid { grid-template-columns: 1fr; gap: 10px; }
+  .info-card { padding: 15px 16px; border-radius: 14px; }
+  .info-card-title { font-size: 12px; }
+  .info-card-body { font-size: 12.8px; line-height: 1.66; }
+
+  /* tabel perbandingan bisa digeser ke samping, ga kepotong */
+  .cmp-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 0 -2px 4px -2px; }
+  .cmp { width: max-content; min-width: 100%; font-size: 11.5px; }
+  .cmp th { font-size: 9px; letter-spacing: .6px; padding: 9px 8px; white-space: nowrap; }
+  .cmp td { padding: 9px 8px; white-space: nowrap; }
+  .cmp-note { font-size: 11.8px; }
+  .tag-pilih, .tag-no { display: block; margin: 3px 0 0 0; font-size: 8px; padding: 2px 6px; width: fit-content; }
+
+  .step { gap: 10px; margin-bottom: 10px; }
+  .step-n { width: 22px; height: 22px; font-size: 11px; border-radius: 7px; }
+  .step-body { font-size: 12.8px; line-height: 1.6; }
+
+  .warn-box { padding: 14px 15px; font-size: 12.8px; line-height: 1.7; }
+  .credit { font-size: 11.5px; line-height: 1.72; margin-top: 30px; }
+
+  /* komponen streamlit */
+  div[data-testid="stWidgetLabel"] p { font-size: 12.4px !important; }
+  div[data-testid="stRadio"] label p { font-size: 12.6px !important; }
+  div[data-testid="stTabs"] button { font-size: 11.6px !important; }
+  .stButton > button { padding: 12px 18px; font-size: 11.5px; letter-spacing: 1px; }
+
+  /* kolom Streamlit ditumpuk di HP, jangan dipaksa 2 kolom sempit */
+  div[data-testid="stHorizontalBlock"] { flex-wrap: wrap !important; gap: .55rem !important; }
+  div[data-testid="stHorizontalBlock"] > div[data-testid="stColumn"] {
+    flex: 1 1 100% !important; width: 100% !important; min-width: 100% !important;
+  }
+
+  /* hiasan latar dikecilkan, sisakan 6 saja biar ga rame */
+  img.note3d { width: 54px !important; opacity: .24 !important; }
+  img.note3d:nth-child(n+7) { display: none; }
+  .bg3d-inner { transform: none; }
+}
+
+@media (max-width: 400px) {
+  .hero-title { font-size: 29px; }
+  .hero-sub { font-size: 12.6px; }
+  .stat-num { font-size: 22px; }
+  .score-num { font-size: 40px; }
+  .bar-name { width: 72px; font-size: 10.5px; }
 }

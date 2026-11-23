@@ -448,14 +448,14 @@ def baris_tabel(nama, kunci, kelas, tag):
 
 
 tabel = (
-    '<table class="cmp"><thead><tr>'
+    '<div class="cmp-wrap"><table class="cmp"><thead><tr>'
     "<th>Model</th><th>MAE</th><th>RMSE</th><th>R&sup2; uji</th>"
     "<th>R&sup2; latih</th><th>Selisih</th></tr></thead><tbody>"
     + baris_tabel("Baseline rata-rata", "Baseline (rata-rata)", "", "")
     + baris_tabel("Ridge Regression", "Ridge", "", "")
     + baris_tabel("Random Forest", "Random Forest", "", '<span class="tag-no">overfitting</span>')
     + baris_tabel("Gradient Boosting", "Gradient Boosting", "pilih", '<span class="tag-pilih">dipakai</span>')
-    + "</tbody></table>"
+    + "</tbody></table></div>"
     '<p class="cmp-note">Diuji pada 1.643 parfum yang sama. MAE lebih kecil lebih baik, '
     "R&sup2; lebih besar lebih baik, selisih R&sup2; lebih kecil lebih baik.</p>"
 )
